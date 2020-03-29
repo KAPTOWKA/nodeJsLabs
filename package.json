@@ -1,7 +1,0 @@
-{
-  "name": "iTechArt",
-  "version": "1.0.0",
-  "dependencies": {
-    "xml2js": "^0.4.23"
-  }
-}

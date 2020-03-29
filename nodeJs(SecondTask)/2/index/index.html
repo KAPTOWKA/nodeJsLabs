@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>SecondTask</title>
+ </head>
+ <body>
+    <h1>SecondTask</h1>
+    <script>
+        let counter = 0;
+        let socket;
+        let intervalMsg;
+
+        const startWs = () => {
+
+            socket = new WebSocket("ws:/localhost:4000/wsserver");
+
+            socket.onopen = () => {
+                document.getElementById("js-textAreaServer").value+=`\nConnection open`;
+            };
+
+            socket.onclose = (cEvent) => {
+                document.getElementById("js-textAreaServer").value+=`\nConnection closed`;
+            };
+
+            socket.onmessage = (cEvent) => {
+                if(cEvent.data.startsWith("Active clients:")){
+                    document.getElementById("js-textListServer").value=`\n${cEvent.data}`;
+                }
+                else{
+                    document.getElementById("js-textAreaServer").value+=`\n${cEvent.data}`;
+                }
+            };
+
+            socket.onerror = (error) =>{
+                alert("Error: " + error.message);
+            };
+        };
+
+        const closeWs = () => {
+            socket.close();
+        };
+
+        const sendMsg = () => {
+            socket.send("from index.html message =>"+document.getElementById("js-broadcastArea").value);
+        }
+    </script>
+    <textarea name="serverMessages" id="js-textAreaServer" cols="50" rows="10"></textarea>
+    <button onclick="startWs()">open connection with WebSocket</button>
+    <button onclick="closeWs()">close connection with WebSocket</button>
+    <div>
+        <textarea name="serverMessages" id="js-textListServer" cols="50" rows="10"></textarea>
+    </div>
+    <textarea name="broadcastMsg" id="js-broadcastArea" cols="50" rows="10"></textarea>
+    <button onclick="sendMsg()">send msg</button>
+</html>

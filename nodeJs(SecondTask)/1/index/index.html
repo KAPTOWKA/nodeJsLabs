@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>FirstTask</title>
+ </head>
+ <body>
+    <h1>FirstTask</h1>
+    <script>
+        let counter = 0;
+        let socket;
+        let intervalMsg;
+
+        const startWs = () => {
+
+            socket = new WebSocket("ws:/localhost:4000/wsserver");
+
+            socket.onopen = () => {
+                intervalMsg = setInterval(() => {
+                    socket.send(++counter);
+                }, 2000);
+            };
+
+            socket.onclose = (cEvent) => {
+                clearTimeout(intervalMsg);
+                document.getElementById("js-textAreaServer").value+=`\nConnection closed`;
+            };
+
+            socket.onmessage = (cEvent) => {
+                document.getElementById("js-textAreaServer").value+=`\n${cEvent.data}`;
+            };
+
+            socket.onerror = (error) =>{
+                alert("Error: " + error.message);
+            };
+        };
+
+        const closeWs = () => {
+            socket.close();
+        };
+    </script>
+    <textarea name="serverMessages" id="js-textAreaServer" cols="30" rows="30"></textarea>
+    <button onclick="startWs()">open connection with WebSocket</button>
+    <button onclick="closeWs()">close connection with WebSocket</button>
+</html>
