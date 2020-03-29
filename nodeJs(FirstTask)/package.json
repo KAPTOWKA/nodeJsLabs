@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "dependencies": {
     "multiparty": "^4.2.1",
+<<<<<<< HEAD:nodeJs(FirstTask)/package.json
     "ws": "^7.2.3",
+=======
+>>>>>>> a3f8fe1ea20ac8984649284c061a1d9b6056ad1d:package.json
     "xml2js": "^0.4.23"
   }
 }
