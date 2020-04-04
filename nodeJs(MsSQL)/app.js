@@ -219,7 +219,12 @@ const server = http.createServer((request,response) => {
                     });
 
                     request.on("end", () => {
-                        sendInsertQuery(response, "FACULTY", JSON.parse(result));
+                        try{
+                            sendInsertQuery(response, "FACULTY", JSON.parse(result));
+                        }
+                        catch(error){
+                            serverError(response, {error: error.message});
+                        }
                     })
 
                     break;
@@ -234,7 +239,12 @@ const server = http.createServer((request,response) => {
                     });
 
                     request.on("end", () => {
-                        sendInsertQuery(response, "PULPIT", JSON.parse(result));
+                        try{
+                            sendInsertQuery(response, "PULPIT", JSON.parse(result));
+                        }
+                        catch(error){
+                            serverError(response, {error: error.message});
+                        }
                     })
 
                     break;
@@ -249,7 +259,13 @@ const server = http.createServer((request,response) => {
                     });
 
                     request.on("end", () => {
-                        sendInsertQuery(response, "SUBJECT", JSON.parse(result));
+                        try{
+                            sendInsertQuery(response, "SUBJECT", JSON.parse(result));
+                        }
+                        catch(error){
+                            serverError(response, {error: error.message});
+                        }
+                        
                     })
 
                     break;
@@ -264,7 +280,13 @@ const server = http.createServer((request,response) => {
                     });
 
                     request.on("end", () => {
-                        sendInsertQuery(response, "AUDITORIUM_TYPE", JSON.parse(result));
+                        try{
+                            sendInsertQuery(response, "AUDITORIUM_TYPE", JSON.parse(result));
+                        }
+                        catch(error){
+                            serverError(response, {error: error.message});
+                        }
+                        
                     })
 
                     break;
@@ -279,7 +301,13 @@ const server = http.createServer((request,response) => {
                     });
 
                     request.on("end", () => {
-                        sendInsertQuery(response, "AUDITORIUM", JSON.parse(result));
+                        try{
+                            sendInsertQuery(response, "AUDITORIUM", JSON.parse(result));
+                        }
+                        catch(error){
+                            serverError(response, {error: error.message});
+                        }
+                        
                     })
 
                     break;
@@ -309,7 +337,13 @@ const server = http.createServer((request,response) => {
                     });
 
                     request.on("end", () => {
-                        sendUpdateQuery(response, "FACULTY", JSON.parse(result));
+                        try{
+                            sendUpdateQuery(response, "FACULTY", JSON.parse(result));
+                        }
+                        catch(error){
+                            serverError(response, {error: error.message});
+                        }
+                        
                     })
 
                     break;
@@ -324,7 +358,14 @@ const server = http.createServer((request,response) => {
                     });
 
                     request.on("end", () => {
-                        sendUpdateQuery(response, "PULPIT", JSON.parse(result));
+
+                        try{
+                            sendUpdateQuery(response, "PULPIT", JSON.parse(result));
+                        }
+                        catch(error){
+                            serverError(response, {error: error.message});
+                        }
+                        
                     })
 
                     break;
@@ -339,7 +380,13 @@ const server = http.createServer((request,response) => {
                     });
 
                     request.on("end", () => {
-                        sendUpdateQuery(response, "SUBJECT", JSON.parse(result));
+                        try{
+                            sendUpdateQuery(response, "SUBJECT", JSON.parse(result));
+                        }
+                        catch(error){
+                            serverError(response, {error: error.message});
+                        }
+                        
                     })
 
                     break;
@@ -354,7 +401,13 @@ const server = http.createServer((request,response) => {
                     });
 
                     request.on("end", () => {
-                        sendUpdateQuery(response, "AUDITORIUM_TYPE", JSON.parse(result));
+                        try{
+                            sendUpdateQuery(response, "AUDITORIUM_TYPE", JSON.parse(result));
+                        }
+                        catch(error){
+                            serverError(response, {error: error.message});
+                        }
+                        
                     })
 
                     break;
@@ -369,7 +422,13 @@ const server = http.createServer((request,response) => {
                     });
 
                     request.on("end", () => {
-                        sendUpdateQuery(response, "AUDITORIUM", JSON.parse(result));
+                        try{
+                            sendUpdateQuery(response, "AUDITORIUM", JSON.parse(result));
+                        }
+                        catch(error){
+                            serverError(response, {error: error.message});
+                        }
+                        
                     })
 
                     break;
