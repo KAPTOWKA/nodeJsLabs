@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Пример веб-страницы</title>
+ </head>
+ <body>
+     <div><button onclick="goGet()">GET</button></div>
+    <div><button onclick="goPost()">POST</button><br><textarea name="post" id="js-post-JSON" cols="100" rows="8"></textarea></div>
+    <div><button onclick="goPUT()">PUT</button><br><textarea name="put" id="js-put-JSON" cols="100" rows="8"></textarea></div>
+    <div><button onclick="goDELETE()">DELETE</button><br><textarea name="delete" id="js-delete-JSON" cols="100" rows="8"></textarea></div>
+    <div>RESULT:<br><textarea name="result" id="js-result" cols="200" rows="10"></textarea></div>
+    <script>
+        const goGet = async () =>{
+            let response = await fetch("http://localhost:3000/api/faculties", {
+                method: "GET"
+            });
+            
+            document.getElementById("js-result").value = await response.text();
+
+        }
+
+        const goPost = async () =>{
+            let response = await fetch("http://localhost:3000/api/faculties", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: document.getElementById("js-post-JSON").value
+            });
+            
+            document.getElementById("js-result").value = await response.text();
+        }
+
+        const goPUT = async () =>{
+            let response = await fetch("http://localhost:3000/api/faculties", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: document.getElementById("js-put-JSON").value
+            });
+            
+            document.getElementById("js-result").value = await response.text();
+        }
+
+        const goDELETE = async () =>{
+
+            let response = await fetch(`http://localhost:3000/api/faculties/${document.getElementById("js-delete-JSON").value}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            });
+            
+            document.getElementById("js-result").value = await response.text();
+        }
+    </script>
+ </body>
+</html>
