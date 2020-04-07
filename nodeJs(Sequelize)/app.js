@@ -212,7 +212,7 @@ const getStaticHtmlFile = (response) => {
 
 const serverError = (response, errorMsg) => {
     response.setHeader("Content-Type", "text/plain");
-    response.statusCode = 405 ;
+    response.statusCode = 500;
     response.end(JSON.stringify(errorMsg));
 };
 
@@ -477,7 +477,13 @@ const server = http.createServer((request,response) => {
                                 }
                             })
                             .then(res => {
-                                sendData(response, result);
+                                if (res.toString() == "0")
+                                {
+                                    serverError(response, {error: "No avaliable Data"});
+                                }
+                                else{
+                                    sendData(response, result);
+                                }
                             })
                             .catch(error => {
                                 serverError(response, {error: error.message});
@@ -512,7 +518,13 @@ const server = http.createServer((request,response) => {
                                 }
                             })
                             .then(res => {
-                                sendData(response, result);
+                                if (res.toString() == "0")
+                                {
+                                    serverError(response, {error: "No avaliable Data"});
+                                }
+                                else{
+                                    sendData(response, result);
+                                }
                             })
                             .catch(error => {
                                 serverError(response, {error: error.message});
@@ -547,7 +559,13 @@ const server = http.createServer((request,response) => {
                                 }
                             })
                             .then(res => {
-                                sendData(response, result);
+                                if (res.toString() == "0")
+                                {
+                                    serverError(response, {error: "No avaliable Data"});
+                                }
+                                else{
+                                    sendData(response, result);
+                                }
                             })
                             .catch(error => {
                                 serverError(response, {error: error.message});
@@ -581,7 +599,13 @@ const server = http.createServer((request,response) => {
                                 }
                             })
                             .then(res => {
-                                sendData(response, result);
+                                if (res.toString() == "0")
+                                {
+                                    serverError(response, {error: "No avaliable Data"});
+                                }
+                                else{
+                                    sendData(response, result);
+                                }
                             })
                             .catch(error => {
                                 serverError(response, {error: error.message});
@@ -617,7 +641,13 @@ const server = http.createServer((request,response) => {
                                 }
                             })
                             .then(res => {
-                                sendData(response, result);
+                                if (res.toString() == "0")
+                                {
+                                    serverError(response, {error: "No avaliable Data"});
+                                }
+                                else{
+                                    sendData(response, result);
+                                }
                             })
                             .catch(error => {
                                 serverError(response, {error: error.message});

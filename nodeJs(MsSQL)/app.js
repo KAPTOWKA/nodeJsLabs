@@ -45,7 +45,7 @@ const getStaticHtmlFile = (response) => {
 
 const serverError = (response, errorMsg) => {
     response.setHeader("Content-Type", "text/plain");
-    response.statusCode = 405 ;
+    response.statusCode = 500 ;
     response.end(JSON.stringify(errorMsg));
 };
 
@@ -85,7 +85,7 @@ const sendInsertQuery = (response, table, data) => {
     }
     placeHolder = placeHolder.substring(0, placeHolder.length-1) + ")";
 
-    pool.query(`INSERT INTO ${table} VALUES ${placeHolder}`, (error, result) => {
+    pool.query(`INSERT INTO ${table} VALUES ${placeHolder}`, (error) => {
         if (error){
             let errorMsg = {
                 code: error.code,
@@ -124,7 +124,13 @@ const sendUpdateQuery = (response, table, data) => {
             serverError(response, errorMsg);
         }
         else {
-            sendData(response, data);
+            if (result.rowsAffected.toString() == "0"){
+                serverError(response, {error: "No avaliable data"});
+            }
+            else{
+                sendData(response, data);
+            }
+            
         }
     });
 };
@@ -144,7 +150,7 @@ const sendDeleteQuery = (response, table) => {
             showVarAsResult = result.recordset;
         }
     });
-    pool.query(`DELETE FROM ${table.name} WHERE ${table.name}='${table.requestParam}'`, (error, result) => {
+    pool.query(`DELETE FROM ${table.name} WHERE ${table.name}='${table.requestParam}'`, (error) => {
         if (error){
             let errorMsg = {
                 code: error.code,
